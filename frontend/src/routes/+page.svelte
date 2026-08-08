@@ -1,19 +1,29 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-
 <script>
-    let msg = $state("Lade…");
+    let aufgaben = $state([]);
 
-    fetch("https://animated-pancake-wrrrw7r6jx5395wp-8000.app.github.dev/")
+    fetch("https://animated-pancake-wrrrw7r6jx5395wp-8000.app.github.dev/api/aufgaben/")
         .then(r => r.json())
         .then(data => {
-            msg = data.msg;
+            aufgaben = data;
         })
         .catch(err => {
-            msg = "Fehler beim Laden der API";
             console.error(err);
         });
 </script>
 
-<h1>{msg}</h1>
+<h1>Aufgaben</h1>
+
+{#if aufgaben.length === 0}
+    <p>Keine Aufgaben gefunden.</p>
+{:else}
+    <ul>
+        {#each aufgaben as a}
+            <li>
+                <strong>{a.titel}</strong><br>
+                {a.beschreibung}
+            </li>
+        {/each}
+    </ul>
+{/if}
+
 
