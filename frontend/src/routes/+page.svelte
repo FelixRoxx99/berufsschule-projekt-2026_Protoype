@@ -1,7 +1,10 @@
-<script>
-    let msg = "Lade…";
+<h1>Welcome to SvelteKit</h1>
+<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
-    fetch("https://animated-pancake-xxxxxx-8000.app.github.dev/")
+<script>
+    let msg = $state("Lade…");
+
+    fetch("https://animated-pancake-wrrrw7r6jx5395wp-8000.app.github.dev/")
         .then(r => r.json())
         .then(data => {
             msg = data.msg;
